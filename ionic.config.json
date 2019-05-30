@@ -1,5 +1,7 @@
 {
   "name": "coupon",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
