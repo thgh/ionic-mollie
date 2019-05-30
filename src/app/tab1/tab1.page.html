@@ -16,8 +16,9 @@
       <ion-card-content>
         <p>Coupon waarde: </p>
         <ion-input type="number" [(ngModel)]="amount"></ion-input>
-        <ion-button>Betaal {{amount}} euro</ion-button>
-        Min. 0.02 en max 250
+        Min. 0.02 en max 250<br>
+        <ion-button (click)="pay(amount)" [disabled]="isBusy">Betaal {{amount}} euro</ion-button>
+        {{isBusy ? 'Betaling bezig' : ''}}
       </ion-card-content>
     </ion-card>
 </ion-content>
