@@ -20,7 +20,7 @@ export class Tab1Page {
   async pay(a) {
     this.payments.push({status: 'open'})
     const response = await fetch(
-      'https://us-central1-coupon-6de23.cloudfunctions.net/createPayment'
+      'https://us-central1-coupon-6de23.cloudfunctions.net/createPayment?amount=' + a
     ).then(r => r.json())
     if (!response._links || !response._links.checkout) {
       return alert('unexpected reponse, payment failed')

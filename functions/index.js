@@ -11,12 +11,20 @@ exports.createPayment = functions.https.onRequest(async (req, res) => {
   const { amount, userId } = req.query
   console.log('userId', userId)
   console.log('amount', amount, parseFloat(amount))
+
+  const amountNum = parseFloat(amount)
+  if (amountNum < 0.02 || amountNum > 250) {
+    res.set('Access-Control-Allow-Origin', '*')
+    res.send(JSON.stringify({ err: 'invalid amount ' + amountNum }))
+    return
+  }
+
   // Create payment
   try {
     const payment = await postJSON('https://api.mollie.com/v2/payments', {
       amount: {
         currency: 'EUR',
-        value: parseFloat(amount).toFixed(2)
+        value: amountNum.toFixed(2)
       },
       description: 'coupon solutions',
       method: 'bancontact',
